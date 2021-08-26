@@ -258,7 +258,7 @@ class ResourceModel::Base
         attr_reader :#{attribute_name}_unconverted_value
         def #{attribute_name}=(value)
           @#{attribute_name}_unconverted_value = value
-          @#{attribute_name} = value.present? && value.to_s =~ #{decimal_regex.inspect} ? BigDecimal.new(value.to_s.gsub(/\\s|[,]/, '')) : nil
+          @#{attribute_name} = value.present? && value.to_s =~ #{decimal_regex.inspect} ? BigDecimal(value.to_s.gsub(/\\s|[,]/, '')) : nil
         end
         validate do
           if self.#{attribute_name}_unconverted_value.present? != self.#{attribute_name}.present?
@@ -284,7 +284,7 @@ class ResourceModel::Base
         attr_reader :#{attribute_name}_unconverted_value
         def #{attribute_name}=(value)
           @#{attribute_name}_unconverted_value = value
-          @#{attribute_name} = value.present? && value.to_s =~ #{usd_regex.inspect} ? BigDecimal.new(value.to_s.gsub(/[\$,]|\\s/, '')) : nil
+          @#{attribute_name} = value.present? && value.to_s =~ #{usd_regex.inspect} ? BigDecimal(value.to_s.gsub(/[\$,]|\\s/, '')) : nil
         end
         validate do
           if self.#{attribute_name}_unconverted_value.present? != self.#{attribute_name}.present?
